@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New User</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href={% static 'style.css' %}>
+        <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="container">
+            <h1>All Users</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in Users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.email_address }}</td>
+                        <td>{{ user.age }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <form action="/user/new" method="post">
+                {% csrf_token %}
+                    <label for="first_name" class ="labels">First Name</label>
+                    <input type="text" id="first_name" name="first_name" class="user_input">
+                        
+                    <label for="last_name" class ="labels">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" class="user_input">
+                        
+                    <label for="email" class ="labels">Email</label>
+                    <input type="email" name="email_address" id="email" class="user_input">
+                        
+                    <label for="age" class ="labels">Age</label>
+                    <input type="number" name="age" id="age" class="user_input">
+                <button>Add</button>
+            </form>
+        </div>
+    </body>
+</html>
